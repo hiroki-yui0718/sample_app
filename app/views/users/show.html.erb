@@ -1,0 +1,17 @@
+<% provide(:title, @user.name) %>
+<div class="row">
+<div class="col-md-4 border-right">
+<% if flash.notice.present? %>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+<p><%= flash.notice %></p>
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<% end %>
+<h1>
+<%= gravatar_for @user %>
+<%= @user.name %>
+</h1>
+</div>
+</div>
