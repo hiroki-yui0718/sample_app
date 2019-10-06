@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
     def index
-        @user = User.all
+        @users = User.paginate(page: params[:page],:per_page => 5)
     end
     def show
-        @users = User.find(params[:id])
+        @user = User.find(params[:id])
     end
     def new
         @user =User.new
@@ -25,6 +25,10 @@ class UsersController < ApplicationController
         else
             render 'edit'
         end
+    end
+    def destroy
+        User.find(params[:id]).destroy
+        redirect_to users_url,notice:"User deleted"
     end
 
 
