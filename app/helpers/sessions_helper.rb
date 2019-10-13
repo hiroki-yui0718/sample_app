@@ -2,7 +2,6 @@ module SessionsHelper # =4
   def current_user
     if (user_id = session[:user_id])
       @current_user ||= User.find_by(id: user_id)
-
     elsif (user_id = cookies.signed[:user_id]) #クッキーの場合
       # raise
       user = User.find_by(id: user_id)

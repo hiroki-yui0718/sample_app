@@ -9,12 +9,20 @@ class SessionsController < ApplicationController
       # Success
       session[:user_id] = user.id
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+      flash[:success] = "Welcome to the Sample App!"
       redirect_to user
     else
       # Failure
-      flash[:danger] = 'Invalid email/password combination'
+      flash.now[:danger] = 'Invalid email/password combination'
       render 'new'
     end
+  end
+
+  def twitter_create
+      user = request.env['omniauth.auth']
+      session[:user_id] = user[:info][:nickname]
+      flash[:success] = "#{session[:user_id]}! Welcome to the Sample App!"
+      redirect_to root_path
   end
 
   # DELETE /logout
